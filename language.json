@@ -1,0 +1,13 @@
+{
+	"eng" : [
+		"Form",
+		"Adresses",
+		"Graph"
+	],
+	
+	"pl" : [
+		"Formularz",
+		"Adresacja",
+		"Graf"
+	];
+}
