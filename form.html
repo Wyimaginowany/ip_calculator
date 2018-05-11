@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="libs/angular.js"></script>
+    <script src="libs/ngmask.min.js"></script>
+	<script src="script.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body ng-app="mainApp" ng-controller="mainAppCon">
+	<div id="form">
+		<div>
+			<select ng-model="classForm" ng-change="classChange()">
+				<option value="" disabled selected>{{ pl[3] }}</option>
+				<option value="a">A</option>
+				<option value="b">B</option>
+				<option value="c">C</option>
+			</select><br>
+			<input type="number" placeholder="{{ pl[5] }}" ng-model="subnetsForm" min="1" max="{{ subnetsFormMax }}" ng-change="subnetsChange()" ng-disabled="subnetsFormD" ng-style="subnetsFormError" mask="9999999">
+		</div>
+		<div></div>
+		<div>
+			<input type="number" placeholder="{{ pl[4] }}" ng-model="hostsForm" min="1" max="{{ hostsFormMax }}" ng-change="hostsChange()" ng-disabled="hostsFormD" ng-style="hostsFormError" mask="99999999">
+			<input type="text" placeholder="{{ pl[6] }}" ng-model="maskForm" ng-disabled="maskFormD" mask="255.255.255.255" ng-change="maskChange()" ng-style="maskFormError">
+		</div><br>
+	</div>
+  </body>
+</html>
