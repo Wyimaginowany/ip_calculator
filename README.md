@@ -1,4 +1,4 @@
-# IP calculator in AngularJS
+# IP calculator in AngularJS //under develop
 Front-end app for calculating subnets IPv4.
 
 - fill the form and receive full note od possible subnets and graph ilustrating network;
