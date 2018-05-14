@@ -2,22 +2,23 @@
 <html>
   <head>
     <script src="libs/angular.js"></script>
-	<script src="libs/ngmask.min.js"></script>
+	<script src="libs/sigma.min.js"></script>
 	<script src="script.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>IPv4 calculator</title>
   </head>
   <body ng-app="mainApp" ng-controller="mainAppCon">
 	<div id="upperMenu">
-		<span>Lorem ipsum</span>
+		<span id="title">IPv4 calculator</span>
 		<div id="upperMenuSlider" ng-style="setMarginMenu">
 			<div id="menuHider" ng-click="showMenu()">
 				Menu
 			</div>
 			<button ng-click="switchMenuForm()" class="btn" style="display: inline-block;"> {{ pl[0] }} </button>
 			<div class="space"></div>
-			<button ng-click="switchMenuAdresses()" class="btn" style="display: inline-block;">{{ pl[1] }}</button>
+			<button ng-click="switchMenuAddresses()" class="btn" style="display: inline-block;">{{ pl[1] }}</button>
 			<div class="space"></div>
 			<button ng-click="switchMenuGraph()" class="btn" style="display: inline-block;">{{ pl[2] }}</button>
 		</div>
@@ -30,10 +31,11 @@
 			</div>
 
 			<div id="social_bar">
-				<a class="social_icon" href="https://www.facebook.com/profile.php?id=100000771247530"></a>|
-				<a class="social_icon" href="https://www.instagram.com/m_pochopien/"></a>|
-				<a class="social_icon" href="https://twitter.com/m_pochopien"></a>|
+				<a class="social_icon" href="https://www.facebook.com/profile.php?id=100000771247530"></a>
+				<a class="social_icon" href="https://www.instagram.com/m_pochopien/"></a>
+				<a class="social_icon" href="https://twitter.com/m_pochopien"></a>
 				<a class="social_icon" href="https://github.com/Wyimaginowany"></a>
+				<a class="social_icon" href="https://www.linkedin.com/in/mpochopien/"></a>
 			</div>
 		</div>
   </body>
