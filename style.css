@@ -39,8 +39,9 @@ html {
 	line-height: 100px;
 }
 
-#upperMenu span {
+#title {
 	font-size: 40px;
+	padding-left: 20px;
 }
 
 #upperMenuSlider {
@@ -97,7 +98,7 @@ html {
 #content {
 	border: none;
 	display: block;
-	margin-top: 100px;
+	margin-top: 200px;
 	width: 100%;
 	height: 100vh;
 	overflow: hidden;	
@@ -126,6 +127,7 @@ html {
 	top: 25%;
 	font-size: 25px;
 	text-align: center;
+	letter-spacing: 5px;
 }
 
 #social_bar a {
@@ -149,6 +151,10 @@ html {
 
 #social_bar a:nth-child(4):hover {
 	color: #221e1b;
+}
+
+#social_bar a:nth-child(5):hover {
+	color: #3371b7;
 }
 
 #copyright {
@@ -209,6 +215,22 @@ html {
 	text-align: center;
 }
 
+.subnetDisplay {
+	margin: 0 auto;
+	text-align: center;
+	width: auto;
+}
+
+.subnetDisplay span{
+	font-weight: bold;
+}
+
+#addressesMain {
+	margin: 0 auto;
+	text-align: center;
+	width: 50%;
+}
+
 @media screen and (max-width: 650px) {
 	#upperMenu span {
 		display: none;
@@ -218,17 +240,26 @@ html {
 		width: 100%;
 		margin-right: -90%;
 	}
+	
+	.btn {
+		font-size: 10px;
+	}
+	
+	#menuHider {
+		font-size: 10px;
+	}
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 480px) {
 	#copyright {
-		font-size: 15px;
+		font-size: 12px;
 		width: 50%;
 	}
 
 	#social_bar {
+		position: unset;
 		font-size: 30px;
-		right: 1%;
-		top: 5%;
+		margin: 0 auto;
+		margin-top: -5%;
 	}
 }
