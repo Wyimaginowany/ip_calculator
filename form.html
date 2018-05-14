@@ -2,13 +2,13 @@
 <html>
   <head>
     <script src="libs/angular.js"></script>
-    <script src="libs/ngmask.min.js"></script>
+    <script src="libs/sigma.min.js"></script>
 	<script src="script.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
-  <body ng-app="mainApp" ng-controller="mainAppCon">
+  <body ng-app="mainApp" ng-controller="formAppCon">
 	<div id="form">
 		<div>
 			<select ng-model="classForm" ng-change="classChange()">
@@ -22,7 +22,7 @@
 		<div></div>
 		<div>
 			<input type="number" placeholder="{{ pl[4] }}" ng-model="hostsForm" min="1" max="{{ hostsFormMax }}" ng-change="hostsChange()" ng-disabled="hostsFormD" ng-style="hostsFormError" mask="99999999">
-			<input type="text" placeholder="{{ pl[6] }}" ng-model="maskForm" ng-disabled="maskFormD" mask="255.255.255.255" ng-change="maskChange()" ng-style="maskFormError">
+			<input type="text" placeholder="{{ pl[6] }}" ng-model="maskForm" ng-disabled="maskFormD" ng-change="maskChange()" ng-style="maskFormError">
 		</div><br>
 	</div>
   </body>
