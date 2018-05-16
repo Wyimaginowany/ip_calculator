@@ -12,17 +12,17 @@
 	<div id="form">
 		<div>
 			<select ng-model="classForm" ng-change="classChange()">
-				<option value="" disabled selected>{{ pl[3] }}</option>
+				<option value="" disabled selected>{{ lang[3] }}</option>
 				<option value="a">A</option>
 				<option value="b">B</option>
 				<option value="c">C</option>
 			</select><br>
-			<input type="number" placeholder="{{ pl[5] }}" ng-model="subnetsForm" min="1" max="{{ subnetsFormMax }}" ng-change="subnetsChange()" ng-disabled="subnetsFormD" ng-style="subnetsFormError" mask="9999999">
+			<input type="number" placeholder="{{ lang[5] }}" ng-model="subnetsForm" min="1" max="{{ subnetsFormMax }}" ng-change="subnetsChange()" ng-disabled="subnetsFormD" ng-style="subnetsFormError" mask="9999999">
 		</div>
 		<div></div>
 		<div>
-			<input type="number" placeholder="{{ pl[4] }}" ng-model="hostsForm" min="1" max="{{ hostsFormMax }}" ng-change="hostsChange()" ng-disabled="hostsFormD" ng-style="hostsFormError" mask="99999999">
-			<input type="text" placeholder="{{ pl[6] }}" ng-model="maskForm" ng-disabled="maskFormD" ng-change="maskChange()" ng-style="maskFormError">
+			<input type="number" placeholder="{{ lang[4] }}" ng-model="hostsForm" min="1" max="{{ hostsFormMax }}" ng-change="hostsChange()" ng-disabled="hostsFormD" ng-style="hostsFormError" mask="99999999">
+			<input type="text" placeholder="{{ lang[6] }}" ng-model="maskForm" ng-disabled="maskFormD" ng-change="maskChange()" ng-style="maskFormError">
 		</div><br>
 	</div>
   </body>
