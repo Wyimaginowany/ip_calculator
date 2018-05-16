@@ -7,13 +7,13 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
-  <body ng-app="mainApp" ng-controller="addressesAppCon">
+  <body ng-app="mainApp" ng-controller="adressesAppCon">
 	<div id="addressesMain">
 		<div ng-repeat="subnet in addresses" class="subnetDisplay">
-			<h3>Podsieć {{ $index+1 }}</h3>
-			<span>{{ pl[7] }}</span> : {{ subnet[0] }} <br>
-			<span>{{ pl[8] }}</span> : {{ subnet[1] }} - {{ subnet[2] }} <br>
-			<span>{{ pl[9] }}</span> : {{ subnet[3] }}
+			<h3>{{ lang[10] }} {{ $index+1 }}</h3>
+			<span>{{ lang[7] }}</span> : {{ subnet[0] }} <br>
+			<span>{{ lang[8] }}</span> : {{ subnet[1] }} - {{ subnet[2] }} <br>
+			<span>{{ lang[9] }}</span> : {{ subnet[3] }}
 			<hr ng-show="!$last">
 		</div>
 	</div>
