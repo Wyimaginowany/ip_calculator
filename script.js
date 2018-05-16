@@ -1,9 +1,9 @@
 let mainApp = angular.module('mainApp', []);
 
-mainApp.run(($rootScope)=>{
-	$rootScope.eng = [
+mainApp.run(($rootScope) =>{
+    $rootScope.eng = [
 			"Form", //0
-			"Addresses", //1
+			"Adresses", //1
 			"Graph", //2
 			"Choose class", //3
 			"Enter number of hosts in each subnet (power of 2 minus 2)", //4
@@ -11,43 +11,44 @@ mainApp.run(($rootScope)=>{
 			"Enter netmask (by pattern: 255.255.255.255)", //6
 			"Subnet address", //7
 			"Subnet range", //8
-			"Broadcast" //9
-		];
+			"Broadcast", //9
+            "Subnet" //10
+    ];
 		
-		$rootScope.pl = [
-			"Formularz", //0
-			"Adresacja", //1
-			"Graf", //2
-			"Wybierz klasę", //3
-			"Wpisz liczbę hostów w każdej podsieci (potęga liczby 2 odjąć 2)", //4
-			"Wpisz liczbę podsieci (potęga liczby 2)", //5
-			"Wprowadź maskę sieci (wg. wzoru: 255.255.255.255)", //6
-			"Adres podsieci", //7
-			"Zakres adresów", //8
-			"Adres rozgłoszeniowy" //9
-		];
+    $rootScope.pl = [
+        "Formularz", //0
+        "Adresacja", //1
+        "Graf", //2
+        "Wybierz klasę", //3
+        "Wpisz liczbę hostów w każdej podsieci (potęga liczby 2 odjąć 2)", //4
+        "Wpisz liczbę podsieci (potęga liczby 2)", //5
+        "Wprowadź maskę sieci (wg. wzoru: 255.255.255.255)", //6
+        "Adres podsieci", //7
+        "Zakres adresów", //8
+        "Adres rozgłoszeniowy", //9
+        "Podsieć" //10
+    ];
+    
+    $rootScope.initLang = () => {
+        //if(typeof sessionStorage.getItem('lang') === 'undefined'){
+        //    sessionStorage.setItem('lang') = 'eng';
+        //) else if(sessionStorage.getItem('lang')=='eng'){
+        //    $rootScope.lang = $rootScope.eng;
+        //} else if(sessionStorage.getItem('lang')=='pl'){
+        //    $rootScope.lang = $rootScope.pl;
+        //}
+        $rootScope.lang = $rootScope.eng; //delete in origin
+    };
+
+    $rootScope.changeLang = (langChoose) => {
+        //sessionStorage.setItem('lang') = langChoose;
+        $rootScope.lang = langChoose == 'eng' ? $rootScope.lang = $rootScope.eng : $rootScope.lang = $rootScope.pl;
+        //document.getElementById('content').contentWindow.location.reload();
+    };
 });
 
-mainApp.controller('mainAppCon', ($rootScope, $scope, $http)=>{
-	//$scope.langTab = null;
-	
-	//$scope.initializer = (()=>{
-	//	$http.get('language.json')
-	//		.then(function(res){
-	//			$scope.lanTab = res.data;                
-	//		});
-	//	
-	//	if(localStorage.getItem("langSetup")===null){
-	//		localStorage.setItem("langSetup", "eng");
-	//	} else {
-	//		if(localStorage.getItem("langSetup")=="eng"){
-	//			$scope.lanTab = $scope.language.eng;
-	//		} else if(localStorage.getItem("langSetup")=="pl"){
-	//			$scope.lanTab = $scope.language.pl;
-	//		}
-	//	}
-	//})()
-	
+mainApp.controller('mainAppCon', ($rootScope, $scope) => {
+    $rootScope.initLang();
 	$scope.statusMenu = false;
 	$scope.showMenu = ()=>{
 		if($scope.statusMenu==false){
@@ -70,7 +71,7 @@ mainApp.controller('mainAppCon', ($rootScope, $scope, $http)=>{
 	};
 
 	$scope.switchMenuAddresses = ()=>{
-		$scope.srcSubPage = "addresses.html";
+		$scope.srcSubPage = "adresses.html";
 	};
 	
 	$scope.switchMenuGraph = ()=>{
@@ -78,7 +79,8 @@ mainApp.controller('mainAppCon', ($rootScope, $scope, $http)=>{
 	};
 });
 
-mainApp.controller('formAppCon', ($rootScope, $scope, $http)=>{
+mainApp.controller('formAppCon', ($rootScope, $scope) => {
+    $rootScope.initLang();
 	//if(!typeof sessionStorage.getItem('dataStorage') === 'undefined'){
 	//	$scope.classForm = sessionStorage.getItem('dataStorage')[0];
 	//	$scope.hostsForm = sessionStorage.getItem('dataStorage')[1];
@@ -326,7 +328,8 @@ mainApp.controller('formAppCon', ($rootScope, $scope, $http)=>{
 	}
 });
 
-mainApp.controller('addressesAppCon', ($rootScope, $scope, $http)=>{
+mainApp.controller('adressesAppCon', ($rootScope, $scope) => {
+    $rootScope.initLang();
 	//if(!typeof sessionStorage.getItem('dataStorage') === 'undefined'){
 	//	$scope.classForm = sessionStorage.getItem('dataStorage')[0];
 	//	$scope.hostsForm = sessionStorage.getItem('dataStorage')[1];
@@ -371,10 +374,50 @@ mainApp.controller('addressesAppCon', ($rootScope, $scope, $http)=>{
 			$scope.addresses.push(addressesTemp);
 		}
 	}
-	
-	console.log($scope.addresses);
 });
 
-mainApp.controller('graphAppCon', ($rootScope, $scope, $http)=>{
-	
+mainApp.controller('graphAppCon', ($rootScope, $scope) => {
+    $rootScope.initLang();
+    //if(!typeof sessionStorage.getItem('dataStorage') === 'undefined'){
+    //	$scope.classForm = sessionStorage.getItem('dataStorage')[0];
+    //	$scope.hostsForm = sessionStorage.getItem('dataStorage')[1];
+    //	$scope.subnetsForm = sessionStorage.getItem('dataStorage')[2];
+    //	$scope.maskForm = sessionStorage.getItem('dataStorage')[3];
+    //}	
+
+    $scope.classForm = 'c';
+    $scope.hostsForm = 62;
+    $scope.subnetsForm = 4;
+    $scope.maskForm = '255.255.255.192';
+    $scope.addresses = [];
+
+    let dataForGraph = {
+        "nodes": [
+          {
+              "id": "classNode",
+              "label": "A node",
+              "x": 0,
+              "y": 0,
+              "size": 3
+          },
+          {
+              "id": "testNode",
+              "label": "A node",
+              "x": 10,
+              "y": 0,
+              "size": 3
+          }
+        ],
+        "edges": [
+          {
+              "id": "e0",
+              "source": "classNode",
+              "target": "testNode"
+          }
+        ]
+    };
+
+    sigma.parsers.json(dataForGraph, {
+        container: '$scope.renderFrame',
+    });
 });
