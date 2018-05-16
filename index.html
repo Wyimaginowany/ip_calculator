@@ -16,18 +16,18 @@
 			<div id="menuHider" ng-click="showMenu()">
 				Menu
 			</div>
-			<button ng-click="switchMenuForm()" class="btn" style="display: inline-block;"> {{ pl[0] }} </button>
+			<button ng-click="switchMenuForm()" class="btn" style="display: inline-block;"> {{ lang[0] }} </button>
 			<div class="space"></div>
-			<button ng-click="switchMenuAddresses()" class="btn" style="display: inline-block;">{{ pl[1] }}</button>
+			<button ng-click="switchMenuAddresses()" class="btn" style="display: inline-block;">{{ lang[1] }}</button>
 			<div class="space"></div>
-			<button ng-click="switchMenuGraph()" class="btn" style="display: inline-block;">{{ pl[2] }}</button>
+			<button ng-click="switchMenuGraph()" class="btn" style="display: inline-block;">{{ lang[2] }}</button>
 		</div>
 	</div>
 	<iframe id="content" ng-src="{{ srcSubPage }}"></iframe>
 	<div id="footer">
 			<div id="copyright">
 				<span style="color: rgb(156, 159, 163);">&copy 2018</span> Michał Pochopień <br>
-				<a>PL</a> | <a>ENG</a>
+				<a ng-click="changeLang('pl')">PL</a> | <a ng-click="changeLang('eng')">ENG</a>
 			</div>
 
 			<div id="social_bar">
