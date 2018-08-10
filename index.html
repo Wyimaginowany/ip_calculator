@@ -2,7 +2,6 @@
 <html>
   <head>
     <script src="libs/angular.js"></script>
-	<script src="libs/sigma.min.js"></script>
 	<script src="script.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="style.css">
@@ -19,8 +18,6 @@
 			<button ng-click="switchMenuForm()" class="btn" style="display: inline-block;"> {{ lang[0] }} </button>
 			<div class="space"></div>
 			<button ng-click="switchMenuAddresses()" class="btn" style="display: inline-block;">{{ lang[1] }}</button>
-			<div class="space"></div>
-			<button ng-click="switchMenuGraph()" class="btn" style="display: inline-block;">{{ lang[2] }}</button>
 		</div>
 	</div>
 	<iframe id="content" ng-src="{{ srcSubPage }}"></iframe>
