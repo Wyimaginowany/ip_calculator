@@ -179,7 +179,7 @@ html {
 
 #form {
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 200px;
 }
 
 #form input,
@@ -229,6 +229,7 @@ html {
 	margin: 0 auto;
 	text-align: center;
 	width: 50%;
+	margin-bottom: 200px;
 }
 
 @media screen and (max-width: 650px) {

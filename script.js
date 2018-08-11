@@ -42,58 +42,22 @@ mainApp.run(($rootScope) => {
 	$rootScope.changeLang = (langChoose) => {
 		sessionStorage.setItem('lang', langChoose);
 		$rootScope.lang = langChoose == 'eng' ? $rootScope.lang = $rootScope.eng : $rootScope.lang = $rootScope.pl;
-		document.getElementById('content').contentWindow.location.reload();
 	};
 });
 
 mainApp.controller('mainAppCon', ($rootScope, $scope) => {
 	$rootScope.initLang();
-	$scope.statusMenu = false;
-	$scope.showMenu = () => {
-		if ($scope.statusMenu == false) {
-			$scope.setMarginMenu = {
-				"margin-right": "0%"
-			};
-			$scope.statusMenu = true;
-		} else {
-			let mobile = window.matchMedia("screen and (max-width: 650px)");
-			if (mobile.matches) {
-				$scope.setMarginMenu = {
-					"margin-right": "-90%"
-				};
-				$scope.statusMenu = false;
-			} else {
-				$scope.setMarginMenu = {
-					"margin-right": "-54%"
-				};
-				$scope.statusMenu = false;
-			}
-		}
-	};
-
-	$scope.switchMenuForm = () => {
-		$scope.srcSubPage = "form.html"
-	};
-
-	$scope.switchMenuAddresses = () => {
-		$scope.srcSubPage = "adresses.html";
-	};
+	
 });
 
 mainApp.controller('formAppCon', ($rootScope, $scope) => {
 	$rootScope.initLang();
-	if (sessionStorage['dataStorage']) {
-		let json = JSON.parse(sessionStorage.getItem('dataStorage'));
-		$scope.classForm = json[0];
-		$scope.hostsForm = json[1];
-		$scope.subnetsForm = json[2];
-		$scope.maskForm = json[3];
-	}
 	
 	$scope.classChange = () => {
 		$scope.hostsForm = "";
 		$scope.subnetsForm = "";
 		$scope.maskForm = "";
+		
 		if ($scope.classForm == null) {
 			$scope.hostsFormD = true;
 			$scope.subnetsFormD = true;
@@ -352,50 +316,56 @@ mainApp.controller('formAppCon', ($rootScope, $scope) => {
 		dataForStorage.push($scope.hostsForm);
 		dataForStorage.push($scope.subnetsForm);
 		dataForStorage.push($scope.maskForm);
-		sessionStorage.setItem('dataStorage', JSON.stringify(dataForStorage));
+		$rootScope.dataStorage = dataForStorage;
 	}
 });
 
 mainApp.controller('adressesAppCon', ($rootScope, $scope) => {
 	$rootScope.initLang();
 	$scope.addresses=[];
-	if (sessionStorage['dataStorage']) {
-		let json = JSON.parse(sessionStorage.getItem('dataStorage'));
-		$scope.classForm = json[0];
-		$scope.hostsForm = json[1];
-		$scope.subnetsForm = json[2];
-		$scope.maskForm = json[3];
-	}
-	
-	if ($scope.classForm == 'a') {
-		let prefix = "10.";
-		for (let i = 0; i < $scope.subnetsForm; i++) {
-			let addressesTemp = [];
-			addressesTemp.push(prefix + ((256 / $scope.subnetsForm) * i) + ".0.0");
-			addressesTemp.push(prefix + ((256 / $scope.subnetsForm) * i) + ".0.1");
-			addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 1) + ".255.254");
-			addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 1) + ".255.255");
-			$scope.addresses.push(addressesTemp);
+	let addressesTemp = [];
+	$rootScope.$watch('dataStorage', ()=>{
+		$scope.classForm = $rootScope.dataStorage[0];
+		$scope.hostsForm = $rootScope.dataStorage[1];
+		$scope.subnetsForm = $rootScope.dataStorage[2];
+		$scope.maskForm = $rootScope.dataStorage[3];
+		if($scope.classForm!=null && $scope.hostsForm!=null && $scope.subnetsForm!=null && $scope.maskForm!=null){
+			if ($scope.classForm == 'a') {
+				let prefix = "10.";
+				$scope.addresses=[];
+				for (let i = 0; i < $scope.subnetsForm; i++) {
+					addressesTemp = [];
+					addressesTemp.push(prefix + ((256 / $scope.subnetsForm) * i) + ".0.0");
+					addressesTemp.push(prefix + ((256 / $scope.subnetsForm) * i) + ".0.1");
+					addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 1) + ".255.254");
+					addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 1) + ".255.255");
+					$scope.addresses.push(addressesTemp);
+				}
+			} else if ($scope.classForm == 'b') {
+				let prefix = "172.16.";
+				$scope.addresses=[];
+				for (let i = 0; i < $scope.subnetsForm; i++) {
+					addressesTemp = [];
+					addressesTemp.push(prefix + ((256 / $scope.subnetsForm) * i) + ".0");
+					addressesTemp.push(prefix + ((256 / $scope.subnetsForm) * i) + ".1");
+					addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 1) + ".254");
+					addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 1) + ".255");
+					$scope.addresses.push(addressesTemp);
+				}
+			} else if ($scope.classForm == 'c') {
+				let prefix = "192.168.0.";
+				$scope.addresses=[];
+				for (let i = 0; i < $scope.subnetsForm; i++) {
+					addressesTemp = [];
+					addressesTemp.push(prefix + ((256 / $scope.subnetsForm) * i));
+					addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * i) + 1));
+					addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 2));
+					addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 1));
+					$scope.addresses.push(addressesTemp);
+				}
+			}
+		} else {
+			$scope.addresses=[];
 		}
-	} else if ($scope.classForm == 'b') {
-		let prefix = "172.16.";
-		for (let i = 0; i < $scope.subnetsForm; i++) {
-			let addressesTemp = [];
-			addressesTemp.push(prefix + ((256 / $scope.subnetsForm) * i) + ".0");
-			addressesTemp.push(prefix + ((256 / $scope.subnetsForm) * i) + ".1");
-			addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 1) + ".254");
-			addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 1) + ".255");
-			$scope.addresses.push(addressesTemp);
-		}
-	} else if ($scope.classForm == 'c') {
-		let prefix = "192.168.0.";
-		for (let i = 0; i < $scope.subnetsForm; i++) {
-			let addressesTemp = [];
-			addressesTemp.push(prefix + ((256 / $scope.subnetsForm) * i));
-			addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * i) + 1));
-			addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 2));
-			addressesTemp.push(prefix + (((256 / $scope.subnetsForm) * (i + 1)) - 1));
-			$scope.addresses.push(addressesTemp);
-		}
-	}
+	});
 });

@@ -12,15 +12,33 @@
 	<div id="upperMenu">
 		<span id="title">IPv4 calculator</span>
 		<div id="upperMenuSlider" ng-style="setMarginMenu">
-			<div id="menuHider" ng-click="showMenu()">
-				Menu
-			</div>
-			<button ng-click="switchMenuForm()" class="btn" style="display: inline-block;"> {{ lang[0] }} </button>
-			<div class="space"></div>
-			<button ng-click="switchMenuAddresses()" class="btn" style="display: inline-block;">{{ lang[1] }}</button>
 		</div>
 	</div>
-	<iframe id="content" ng-src="{{ srcSubPage }}"></iframe>
+	<div id="form" ng-app="mainApp" ng-controller="formAppCon">
+		<div>
+			<select ng-model="classForm" ng-change="classChange()">
+				<option value="" disabled selected>{{ lang[3] }}</option>
+				<option value="a">A</option>
+				<option value="b">B</option>
+				<option value="c">C</option>
+			</select><br>
+			<input type="number" placeholder="{{ lang[5] }}" ng-model="subnetsForm" min="1" max="{{ subnetsFormMax }}" ng-change="subnetsChange()" ng-disabled="subnetsFormD" ng-style="subnetsFormError" mask="9999999">
+		</div>
+		<div></div>
+		<div>
+			<input type="number" placeholder="{{ lang[4] }}" ng-model="hostsForm" min="1" max="{{ hostsFormMax }}" ng-change="hostsChange()" ng-disabled="hostsFormD" ng-style="hostsFormError" mask="99999999">
+			<input type="text" placeholder="{{ lang[6] }}" ng-model="maskForm" ng-disabled="maskFormD" ng-change="maskChange()" ng-style="maskFormError">
+		</div><br>
+	</div>
+	<div id="addressesMain" ng-app="mainApp" ng-controller="adressesAppCon">
+		<div ng-repeat="subnet in addresses" class="subnetDisplay">
+			<h3>{{ lang[10] }} {{ $index+1 }}</h3>
+			<span>{{ lang[7] }}</span> : {{ subnet[0] }} <br>
+			<span>{{ lang[8] }}</span> : {{ subnet[1] }} - {{ subnet[2] }} <br>
+			<span>{{ lang[9] }}</span> : {{ subnet[3] }}
+			<hr ng-show="!$last">
+		</div>
+	</div>
 	<div id="footer">
 			<div id="copyright">
 				<span style="color: rgb(156, 159, 163);">&copy 2018</span> Michał Pochopień <br>
